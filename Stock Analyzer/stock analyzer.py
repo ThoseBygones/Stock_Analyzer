@@ -27,7 +27,7 @@ class GraphicInterface(Frame):
     # 初始化年月日列表函数
     def InitList(self):
         # 计算允许查询的时间段（允许查询当年年份和上一年份的数据）
-        today = datetime.today();   # 获取今天的时间
+        today = datetime.today()    # 获取今天的时间
         self.yearList = [today.year-1, today.year]  # 初始化年列表
         for i in range(1,13):
             self.monthList.append(str(i))   # 初始化月列表
@@ -42,6 +42,16 @@ class GraphicInterface(Frame):
     
     # 判断各项输入是否合法
     def CheckDateValidity(self, y, m, d):
+        # 判断输入的日期是否早于今天
+        date1 = str(y) + '-' + str(m) + '-' + str(d)
+        today = datetime.today()    # 获取今天的时间
+        date2 = str(today.year) + '-' + str(today.month) + '-' + str(today.day)
+        strftime1 = datetime.strptime(date1, "%Y-%m-%d")  
+        strftime2 = datetime.strptime(date2, "%Y-%m-%d")
+        if strftime1 >= strftime2:   # 比较输入的日期和今天的日期
+            messagebox.showinfo('Message', '您输入的日期应早于今天的日期！')
+            return False
+        # 判断输入的日期是否合法
         if self.IsLeapYear(y):
             if d > self.month1[m-1]:
                 messagebox.showinfo('Message', '您输入的日期有误！')
@@ -54,23 +64,41 @@ class GraphicInterface(Frame):
                 return False
             else:
                 return True
-        
+    
+    # 判断日期范围是否合法
+    def CheckDateRange(self, y1, m1, d1, y2, m2, d2):
+        if y1 > y2:
+            messagebox.showinfo('Message', '您选择的年份范围有误！')
+            return False
+        elif y1 == y2:
+            if m1 > m2:
+                messagebox.showinfo('Message', '您选择的月份范围有误！')
+                return False
+            elif m1 == m2:
+                if d1 > d2:
+                    messagebox.showinfo('Message', '您选择的日期范围有误！')
+                    return False
+                elif d1 + 5 > d2:
+                    messagebox.showinfo('Message', '您选择的日期跨度不应该小于5天！')
+                    return False
+        return True
+    
     # 创建窗体的函数
     def CreateWidgets(self):
         self.nb = ttk.Notebook()    # 使用ttk中的Notebook作为窗体的模板
-        self.master.title('股票数据分析程序V1.0')   # 窗体标题
+        self.master.title('股票数据分析程序V2.1')   # 窗体标题
         self.master.geometry('1050x560')    # 设置窗体的几何大小
         self.master.resizable(0,0)    #不允许对窗口大小进行调整
         self.master.iconbitmap('stock.ico') # 设置窗体的左上角的图标
         
-        # “单股分析”选项卡
+        # “单股查询”选项卡
         self.page1 = ttk.Frame(self.nb)
-        # “单股分析”页图片
+        # “单股查询”页图片
         self.image1 = Label(self.page1, image=img)
         self.image1.grid(row=0, column=0, sticky=W, rowspan=10, columnspan=3, padx=10, pady=10)
         # 标题
-        self.label1 = Label(self.page1, font=('黑体',15), text="单只股票历史数据查询")
-        self.label1.grid(row=0, column=4, rowspan=2, columnspan=2, padx=5, pady=5)
+        self.label1 = Label(self.page1, font=('黑体',15), text="股票历史数据查询（折线图）")
+        self.label1.grid(row=0, column=4, rowspan=2, columnspan=3, padx=5, pady=5)
         # 提示文本
         self.label1 = Label(self.page1, text="请输入要查询的股票代码：")
         self.label1.grid(row=2, column=4, padx=5, pady=5)
@@ -156,8 +184,8 @@ class GraphicInterface(Frame):
         self.image2 = Label(self.page2, image=img)
         self.image2.grid(row=0, column=0, sticky=W, rowspan=10, columnspan=3, padx=10, pady=10)
         # 标题
-        self.label12 = Label(self.page2, font=('黑体',15), text="股票对比分析（柱状图绘制）")
-        self.label12.grid(row=1, column=4, rowspan=2, columnspan=2, padx=5, pady=5)
+        self.label12 = Label(self.page2, font=('黑体',15), text="实时分笔数据对比（柱状图）")
+        self.label12.grid(row=1, column=4, rowspan=2, columnspan=3, padx=5, pady=5)
         # 提示文本
         self.label13 = Label(self.page2, text="请输入要对比的股票代码1：")
         self.label13.grid(row=4, column=4, padx=5, pady=5)
@@ -175,7 +203,7 @@ class GraphicInterface(Frame):
         self.alertButton2.grid(row=6, column=5, columnspan=2, padx=5, pady=10)
         
         # 将两个选项卡页面加入窗体
-        self.nb.add(self.page1, text='单股分析')
+        self.nb.add(self.page1, text='单股查询')
         self.nb.add(self.page2, text='对比分析')
         self.nb.pack(expand=1, fill="both")
     
@@ -199,7 +227,7 @@ class GraphicInterface(Frame):
             messagebox.showinfo('Message', '您还未选择日期！')
         elif not var1 and not var2 and not var3 and not var4 and not var5:
             messagebox.showinfo('Message', '您还未选择绘制选项！')
-        elif self.CheckDateValidity(int(y1), int(m1), int(d1)) and self.CheckDateValidity(int(y2), int(m2), int(d2)):
+        elif self.CheckDateValidity(int(y1), int(m1), int(d1)) and self.CheckDateValidity(int(y2), int(m2), int(d2)) and self.CheckDateRange(int(y1), int(m1), int(d1), int(y2), int(m2), int(d2)):
             startDate = y1 + '-' + m1.zfill(2) + '-' + d1.zfill(2)
             endDate = y2 + '-' + m2.zfill(2) + '-' + d2.zfill(2)
             try:
@@ -243,6 +271,7 @@ def DrawLine(code, data, openVar, highVar, closeVar, lowVar, volVar):
     plt.xlabel("日期")    # 设置X轴的文字
     plt.ylabel("指数")    # 设置Y轴的文字
     plt.title("股票 "+code+" 走势折线图")  # 设置图的标题
+    plt.xticks(rotation=45)
     # 根据传入的参数来确定要绘制的折线
     if openVar == True:
         plt.plot_date(x, data['open'], '-', label="开盘价")
