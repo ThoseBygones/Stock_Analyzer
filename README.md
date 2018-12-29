@@ -18,6 +18,9 @@ Language: Python
   > - 增加了对选择日期范围的合法性的检查。
   > - 增加了对选择日期是否早于今天的检查（考虑到查询当天的股票数据时若股市未收盘，会查询不到当天的数据）。
   > - 增加了对选择日期跨度是否大于5天的检查（考虑到选择的日期范围中可能有周末，且仅一天的数据时无法绘制成折线图的）。
+  > - 窗体组件进行了重新的美化布局。
+  > - 修改了程序导航栏标题显示错误版本的问题。
+  > - 修改了每个主界面的标题。
   > - ~~发现窗体类图片文件找不到或路径不正确时可能造成程序崩溃的问题。~~
   > - ~~发现输入的股票代码不合法造成的程序崩溃问题。~~
 
@@ -27,6 +30,7 @@ Language: Python
   > - 通过输入两只股票的代码，来获取相应股票的实时分笔数据。
   > - 程序会根据获得的股票数据分别绘制两只股票某些数据（例如 “开盘价”、“最高价”、“收盘价” 等等）的柱状图。
   > - 增加了异常处理，对于获取数据失败和绘制图表失败造成的程序崩溃进行了修复。
+  > - 增加了每个选项卡的标题。
   > - ~~发现输入日期范围不合法造成绘制的图表为空的问题。~~
   > - ~~发现输入的股票代码不合法造成的程序崩溃问题。~~
 
@@ -42,16 +46,16 @@ Language: Python
 
 + #### 主界面 & 单股查询选项卡
 
-  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img1.jpg>
+  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img1.jpg)
 
 + #### 绘制出的折线图
 
-  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img2.jpg>
+  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img2.jpg)
 
 + #### 主界面 & 对比分析选项卡
 
-  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg>
+  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg>)
 
 + ####绘制出的柱状图
 
-  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img4.jpg>
+  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img4.jpg)
