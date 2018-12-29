@@ -56,6 +56,6 @@ Language: Python
 
   ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg)
 
-+ ####绘制出的柱状图
++ #### 绘制出的柱状图
 
   ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img4.jpg)
