@@ -37,3 +37,21 @@ Language: Python
   > - 程序根据获得的股票数据绘制股票趋势折线图。
   >
   > - 选择的日期不合法会提示用户重新选择，且未输入股票代码、未选择时间或未选择参数时程序均会提示用户。
+
+## 程序展示
+
++ #### 主界面 & 单股查询选项卡
+
+  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img1.jpg>
+
++ #### 绘制出的折线图
+
+  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img2.jpg>
+
++ #### 主界面 & 对比分析选项卡
+
+  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg>
+
++ ####绘制出的柱状图
+
+  <https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img4.jpg>
