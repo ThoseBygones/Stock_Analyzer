@@ -54,7 +54,7 @@ Language: Python
 
 + #### 主界面 & 对比分析选项卡
 
-  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg>)
+  ![](https://github.com/ThoseBygones/Stock_Analyzer/raw/master/images/img3.jpg)
 
 + ####绘制出的柱状图
 
